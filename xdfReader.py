@@ -1,8 +1,9 @@
 import pyxdf
 import matplotlib.pyplot as plt
 import numpy as np
+import mne
 
-streams, header = pyxdf.load_xdf("sub-P001_ses-S001_task-Default_run-001_eeg.xdf")
+streams, header = pyxdf.load_xdf("markersPlusEKG.xdf")
 for stream in streams:
     y = stream['time_series']
     print(stream['info']['name'])
@@ -16,7 +17,7 @@ for stream in streams:
         
     elif isinstance(y, np.ndarray):
         # numeric data, draw as lines
-        plt.plot(stream['time_stamps'], y, 'o')
+        plt.plot(stream['time_stamps'], y[:,0], 'o')
         
         # if multiple options for data, need to expand this to include selection by name
         if stream["info"]["type"]==['EEG']:
