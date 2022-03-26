@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.fft import fft, fftfreq
-import mne.filter as filter
+import scipy.signal as filter
 
 pi = np.pi
 A1 = 1
@@ -22,7 +22,9 @@ xf = fftfreq(int(1/.0001), .0001)
 plt.xlim([-60, 60])
 #plt.show()
 
-filtered_data = filter.notch_filter(y, 1/.0001, 50)
+a, b = filter.iirnotch(50, 50/200, int(1/.0001))
+print(a, b)
+filtered_data = filter.lfilter(a, b, y)
 yf = fft(filtered_data)
 xf = fftfreq(int(1/.0001), .0001)
 plt.plot(xf, yf)
