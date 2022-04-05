@@ -1,9 +1,13 @@
+from pyrsistent import thaw
 import pyxdf
 import matplotlib.pyplot as plt
 import numpy as np
 import mne
-from scipy.fft import fft, fftfreq
-import mne.filter as filter
+from scipy.fft import rfft, rfftfreq
+import scipy.signal as filter
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
 
 #xdf reader to collect numpy arrays of markers and eeg data
 streams, header = pyxdf.load_xdf("markersPlusEKG.xdf")
@@ -35,54 +39,54 @@ for stream in streams:
           first_samp = stream["time_stamps"][0]
     else:
         raise RuntimeError('Unknown stream format')
-#plt.show()
+plt.title("Pre-Filtered Data")
+# plt.show()
 plt.clf()
 
 
 # fourier analysis
 total_time = eeg_time[-1] - eeg_time[0]
-sampling_rate = len(eeg_data)/total_time
-print("total time: " + str(sampling_rate))
-yf = fft(eeg_data)
-xf = fftfreq(len(eeg_data), 1/sampling_rate)
-# plt.plot(xf, np.abs(yf))
-# plt.xlim([0, 0.2])
-# plt.show()
+yf = rfft(eeg_data)
+xf = rfftfreq(len(eeg_data), 1/500)
+plt.plot(xf, np.abs(yf))
+plt.xlim([0, 200])
+plt.ylim([-1, 5000])
+plt.title("Pre-Filtered FFT")
+plt.show()
+plt.clf()
 
 # notch filter implementation
-print(eeg_data)
 eeg_data = np.float64(eeg_data)
-print(type(eeg_data[0]))
-filtered_data = filter.notch_filter(eeg_data, sampling_rate, 60)
-# plt.plot(eeg_time, filtered_data)
-# plt.show()
+b, a = filter.iirnotch(120, 30, 500)
+filtered_data_1 = filter.filtfilt(b, a, eeg_data)
+b, a = filter.iirnotch(60, 30, 500)
+filtered_data = filter.filtfilt(b, a, filtered_data_1)
+plt.plot(eeg_time, filtered_data)
+plt.title("Filtered Data")
+plt.show()
 
-# mean centering the data
-mean_centered_eeg_data = eeg_data - sum(eeg_data)/len(eeg_data)
+yf_filt = rfft(filtered_data)
+xf_filt = rfftfreq(len(filtered_data), d=1/500)
+plt.plot(xf_filt, np.abs(yf_filt))
+plt.xlim([0, 200])
+plt.ylim([-1, 5000])
+plt.title("Filtered FFT")
+plt.show()
+
 # plt.plot(eeg_time, mean_centered_eeg_data)
 # plt.show()
 
 # segmentation according to each marker
-upper_segment_threshold = 2
-lower_segment_threshold = -1
-# print(eeg_time)
-# lower_time = markers_time[5] + lower_segment_threshold
-# upper_time = markers_time[0] + upper_segment_threshold
-# temp = np.abs(eeg_time - lower_time)
-# print(markers_time[3])
-# nearest_time = min(temp) + lower_time
-# print(nearest_time)
-# blah = np.where(eeg_time==nearest_time)
-# print(blah)
-# int_eeg_time = np.empty(0)
-# for i in range(len(eeg_time)):
-#     np.append(int_eeg_time, int(eeg_time[i]))
-# blah = np.where(int_eeg_time==int(nearest_time))
-# print(blah)
-for i in range(len(markers_time)):
+upper_segment_threshold = .2
+lower_segment_threshold = -.2
+
+times = []
+clean_data = []
+
+#for i in range(len(markers_time)):
+for i in range(1, 29):
     lower_time = markers_time[i] + lower_segment_threshold
     upper_time = markers_time[i] + upper_segment_threshold
-    print(lower_time, upper_time)
     lower_error = None
     upper_error = None
     lower_index = None
@@ -94,10 +98,45 @@ for i in range(len(markers_time)):
         if upper_error is None or upper_error > abs(upper_time-eeg_time[j]):
             upper_error = abs(upper_time - eeg_time[j])
             upper_index = j
-    print(lower_index, upper_index)
-    print(eeg_time[lower_index], eeg_time[upper_index])
-    plt.plot(eeg_time[lower_index:upper_index], eeg_data[lower_index:upper_index])
-    plt.plot(markers_time, markers_data + 63000, 'ro')
-    plt.ylim([60000, 70000])
-    plt.xlim([eeg_time[lower_index], eeg_time[upper_index]])
-    plt.show()
+    plt.plot(eeg_time[lower_index:upper_index] - eeg_time[lower_index], filtered_data[lower_index:upper_index] - sum(filtered_data[lower_index:upper_index])/len(filtered_data[lower_index:upper_index]))
+    plt.plot(markers_time[i] - eeg_time[lower_index], markers_data[i], 'ro')
+    clean_data.append(filtered_data[lower_index:upper_index] - sum(filtered_data[lower_index:upper_index])/len(filtered_data[lower_index:upper_index]))
+    times.append(eeg_time[lower_index:upper_index] - eeg_time[lower_index])
+    print(upper_index-lower_index)
+plt.xlim([0, .6])
+# plt.show()
+print(eeg_time[1700])
+print(len(markers_data))
+
+data_none = []
+for i in range(1, 29):
+    data_none.append(filtered_data[1700+10*i:1850*10*i] - sum(filtered_data[1700+10*i:1850*10*i])/len(filtered_data[1700+10*i:1850*10*i]))
+
+
+
+data = []
+blink_state = []
+for i in range(len(clean_data)):
+    data.append([max(clean_data[i]), 0])
+    blink_state.append(1)
+    data.append([max(data_none[i]), 0])
+    blink_state.append(0)
+
+training_threshold = int(.75 * len(data))
+
+training_x = data[:training_threshold]
+training_y = blink_state[:training_threshold]
+testing_x = data[training_threshold:]
+testing_y = blink_state[:training_threshold]
+
+clf = make_pipeline(StandardScaler(), SVC(gamma='auto'))
+clf.fit(training_x, training_y)
+
+predictions = clf.predict(testing_x)
+
+accuracy = 0
+for i in range(len(predictions)):
+    if predictions[i] == testing_y[i]:
+        accuracy += 1/len(predictions)
+
+print(accuracy)
