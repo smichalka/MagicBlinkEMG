@@ -15,16 +15,18 @@ def main():
     # connections wouldn't auto-recover). The important part is that the
     # content-type is set to 'Markers', because then other programs will know how
     #  to interpret the content
-    info = StreamInfo('MyMarkerStream', 'Markers', 1, 0, 'string', 'myuidw43536')
+    info = StreamInfo('MyMarkerStream', 'Ints', 1, 0, 'string', 'myuidw43536')
 
     # next make an outlet
     outlet = StreamOutlet(info)
 
     print("now sending markers...")
-    markernames = ['Test', 'Blah', 'Marker', 'XXX', 'Testtest', 'Test-1-2-3']
+    #markernames = ['Test', 'Blah', 'Marker', 'XXX', 'Testtest', 'Test-1-2-3']
+    markernames = ['T', 'B', 'M', 'X', 'T', 'T']
     while True:
         # pick a sample to send an wait for a bit
-        outlet.push_sample([random.choice(markernames)])
+        #outlet.push_sample([random.choice(markernames)])
+        outlet.push_sample(['1'])
         time.sleep(random.random() * 3)
 
 
