@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/CMarkersTest/CMarkersTest.csproj",
-      "projectName": "CMarkersTest",
-      "projectPath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/CMarkersTest/CMarkersTest.csproj",
+      "projectUniqueName": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
+      "projectName": "eventTest",
+      "projectPath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
       "packagesPath": "/home/achakraborty/.nuget/packages/",
-      "outputPath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/CMarkersTest/obj/",
+      "outputPath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/achakraborty/.nuget/NuGet/NuGet.Config"

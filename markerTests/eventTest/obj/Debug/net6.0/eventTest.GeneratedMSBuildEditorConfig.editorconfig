@@ -6,5 +6,5 @@ build_property.ProjectTypeGuids =
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
-build_property.RootNamespace = CMarkersTest
-build_property.ProjectDir = /home/achakraborty/Documents/MagicBlinkEMG/markerTests/CMarkersTest/
+build_property.RootNamespace = eventTest
+build_property.ProjectDir = /home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/

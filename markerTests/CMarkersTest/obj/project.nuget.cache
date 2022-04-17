@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "39BEaxlRe0QwGw9PJTcVvhXmYXUAWhIDnHYfzmRXbZwcPTN7BHHgMZ2ETCutiwXDim0Uq7VRzFJPDG5ggRquCA==",
+  "dgSpecHash": "IiYwW8W8qdboRPvXbd5W+bfxJARyz2mor5oIa1CsZW8ZR4WUmWoNafIZ6sU310/MifZDMWxfmndzNRy2UbzhvQ==",
   "success": true,
-  "projectFilePath": "/home/achakraborty/Documents/MagicBlinkEMG/CMarkersTest/CMarkersTest.csproj",
+  "projectFilePath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/CMarkersTest/CMarkersTest.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
