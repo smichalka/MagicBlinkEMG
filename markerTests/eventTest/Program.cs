@@ -1,4 +1,5 @@
 ﻿using System;
+using LSL;
 
 namespace Event_Example
 {
@@ -19,9 +20,9 @@ namespace Event_Example
     public class MyClass
     {
         public event MyEventHandler OnMaximum;
-        private int i;
+        private double i;
         private int Maximum = 10;
-        public int MyValue
+        public double MyValue
         {
             get
             {
@@ -54,11 +55,13 @@ namespace Event_Example
         {
             MyClass MyObject = new MyClass();
             MyObject.OnMaximum += new MyEventHandler(MaximumReached);
-
-            for(int x = 0; x<=150; x++)
+            StreamInfo[] results = LSL.LSL.resolve_stream("name", "MyMarkerStream");
+            using StreamInlet inlet = new StreamInlet(results[0]);
+            results.DisposeArray();
+            string[] sample = new string[1];
+            for(int x = 0; x<=15; x++)
             {
-                MyObject.MyValue = x;
-                Console.WriteLine(x.ToString());
+                MyObject.MyValue = inlet.pull_sample(sample);
             }
 
             Console.ReadLine();
