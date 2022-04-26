@@ -39,6 +39,8 @@ def main():
     info = StreamInfo(marker_stream_name, 'Markers', 1, 0, 'string')
     outlet = StreamOutlet(info)
 
+    outlet.push_sample(['SettingUp'])
+
     pygame.init()
     screen = pygame.display.set_mode((800, 600), pygame.RESIZABLE)
     font = pygame.font.SysFont(None, 54)
