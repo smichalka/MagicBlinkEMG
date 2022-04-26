@@ -55,12 +55,14 @@ namespace Event_Example
         {
             MyClass MyObject = new MyClass();
             MyObject.OnMaximum += new MyEventHandler(MaximumReached);
-            StreamInfo[] results = LSL.LSL.resolve_stream("name", "MyMarkerStream", 1, 0.5f);
-            StreamInlet inlet = new StreamInlet(results[0]);
+            StreamInfo[] results = LSL.LSL.resolve_stream("name", "MyMarkerStream");
+            using StreamInlet inlet = new StreamInlet(results[0]);
+            results.DisposeArray();
+            Console.WriteLine("Here");
             string[] sample = new string[1];
             for(int x = 0; x<=15; x++)
             {
-                MyObject.MyValue = inlet.pull_sample(sample);
+                MyObject.MyValue = inlet.pull_sample(sample, timeout: 0.0);
             }
 
             Console.ReadLine();

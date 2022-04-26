@@ -13,11 +13,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "/home/achakraborty/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
       "projectName": "eventTest",
       "projectPath": "/home/achakraborty/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
       "packagesPath": "/home/achakraborty/.nuget/packages/",
       "outputPath": "/home/achakraborty/MagicBlinkEMG/markerTests/eventTest/obj/",
+=======
+      "projectUniqueName": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
+      "projectName": "eventTest",
+      "projectPath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
+      "packagesPath": "/home/achakraborty/.nuget/packages/",
+      "outputPath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/obj/",
+>>>>>>> 907a92197f5cb3aa30d11332cb0cc3fcc7269d24
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/achakraborty/.nuget/NuGet/NuGet.Config"
@@ -58,7 +66,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.202/RuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
+>>>>>>> 907a92197f5cb3aa30d11332cb0cc3fcc7269d24
       }
     }
   }

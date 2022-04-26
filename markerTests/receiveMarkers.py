@@ -14,7 +14,7 @@ def main():
     while True:
         # get a new sample (you can also omit the timestamp part if you're not
         # interested in it)
-        sample, timestamp = inlet.pull_sample()
+        sample, timestamp = inlet.pull_sample(timeout=0.0)
         print("got %s at time %s" % (sample[0], timestamp))
 
 

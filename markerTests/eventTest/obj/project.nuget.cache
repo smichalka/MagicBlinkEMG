@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "xMLCPxKG9qPGUs3sDYLwNeWrgfCG/6onZeYtwiaysKzekYYm98xB9L4dZ17ZywSTzVr8s4Zz8GcxIDRL1lGtdQ==",
   "success": true,
   "projectFilePath": "/home/achakraborty/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
+=======
+  "dgSpecHash": "mG71bLkusQCbr2/X9osbC/3F3e21coTvEBMJ/S+oDRGrQpUBja1ligCOtC2vMN11OGD8l2AJnmSWCPS2LCcfIA==",
+  "success": true,
+  "projectFilePath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
+>>>>>>> 907a92197f5cb3aa30d11332cb0cc3fcc7269d24
   "expectedPackageFiles": [],
   "logs": []
 }
