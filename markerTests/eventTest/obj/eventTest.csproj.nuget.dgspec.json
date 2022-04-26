@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/Ayush/Documents/GitHub/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj": {}
+    "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj": {}
   },
   "projects": {
-    "/Users/Ayush/Documents/GitHub/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj": {
+    "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/Ayush/Documents/GitHub/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
+        "projectUniqueName": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
         "projectName": "eventTest",
-        "projectPath": "/Users/Ayush/Documents/GitHub/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
-        "packagesPath": "/Users/Ayush/.nuget/packages/",
-        "outputPath": "/Users/Ayush/Documents/GitHub/MagicBlinkEMG/markerTests/eventTest/obj/",
+        "projectPath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/eventTest.csproj",
+        "packagesPath": "/home/achakraborty/.nuget/packages/",
+        "outputPath": "/home/achakraborty/Documents/MagicBlinkEMG/markerTests/eventTest/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/Ayush/.nuget/NuGet/NuGet.Config"
+          "/home/achakraborty/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.202/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
         }
       }
     }
