@@ -63,7 +63,7 @@ b, a = filter.iirnotch(60, 30, 500)
 filtered_data = filter.filtfilt(b, a, filtered_data_1)
 plt.plot(eeg_time, filtered_data)
 plt.title("Filtered Data")
-plt.show()
+plt.show()    # pdb.set_trace()
 
 yf_filt = rfft(filtered_data)
 xf_filt = rfftfreq(len(filtered_data), d=1/500)
