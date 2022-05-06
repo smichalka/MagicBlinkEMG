@@ -9,17 +9,19 @@ import sklearn.model_selection as model_selection
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 
-data_file_paths = [
-    "dataFiles/threeMotionData/three_motion_one.xdf",
-    "dataFiles/threeMotionData/three_motion_two.xdf",
-    "dataFiles/threeMotionData/three_motion_three.xdf",
-    "dataFiles/threeMotionData/three_motion_four.xdf",
-    "dataFiles/threeMotionData/three_motion_five.xdf",
-    "dataFiles/threeMotionData/three_motion_six.xdf",
-    "dataFiles/threeMotionData/three_motion_seven.xdf"
-    ]
+# data_file_paths = [
+#     "dataFiles/threeMotionData/three_motion_one.xdf",
+#     "dataFiles/threeMotionData/three_motion_two.xdf",
+#     "dataFiles/threeMotionData/three_motion_three.xdf",
+#     "dataFiles/threeMotionData/three_motion_four.xdf",
+#     "dataFiles/threeMotionData/three_motion_five.xdf",
+#     "dataFiles/threeMotionData/three_motion_six.xdf",
+#     "dataFiles/threeMotionData/three_motion_seven.xdf"
+#     ]
 
-streams, _ = pyxdf.load_xdf("dataFiles/threeMotionData/three_motion_one.xdf")
+data_file_paths = ["dataFiles/test2.xdf", "dataFiles/raiyan.xdf"]
+
+streams, _ = pyxdf.load_xdf("dataFiles/test2.xdf")
 for stream in streams:
     if stream['info']['name'] == ['MyMarkerStream']:
         markers_time = stream['time_stamps']
@@ -85,12 +87,12 @@ processed_markers = []
 for marker in epoched_markers_values:
     processed_markers.append(marker[0])
 
-X_train, X_test, y_train, y_test = model_selection.train_test_split(features, processed_markers, train_size=0.80, test_size=0.20, random_state=101)
+X_train, X_test, y_train, y_test = model_selection.train_test_split(features, processed_markers, train_size=5/6, test_size=1/6, random_state=101, shuffle=False)
 neigh = KNeighborsClassifier(n_neighbors=3)
 neigh.fit(X_train, y_train)
 neigh_pred = neigh.predict(X_test)
 accuracy = 0
-for i in range(130):
+for i, value in enumerate(neigh_pred):
     if neigh_pred[i] == y_test[i]:
-        accuracy += 1/130
+        accuracy += 1/len(y_test)
 print(accuracy)

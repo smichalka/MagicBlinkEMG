@@ -5,11 +5,9 @@ import json
 import numpy as np
 import random
 import string
-from pylsl import StreamInfo, StreamOutlet
+from markerTests.pylsl import StreamInfo, StreamOutlet
 import argparse
 import pygame
-
-
 
 def lsl_setup(marker_stream_name):
     # LSL

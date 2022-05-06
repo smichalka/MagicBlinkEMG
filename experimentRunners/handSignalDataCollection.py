@@ -60,12 +60,12 @@ def main():
                 if event.key == pygame.K_SPACE and begin_trial:
                     stimulus = generate_next_stimulus_msg(f'{hand_motions[current_stimulus]} start')
                     display_sentence(stimulus, screen, font)
-                    outlet.push_sample([f"{current_stimulus}"])
+                    outlet.push_sample([f"{current_stimulus}s"])
                     begin_trial = False
                 elif event.key == pygame.K_SPACE:
                     stimulus = generate_next_stimulus_msg(f'{hand_motions[current_stimulus]} finish')
                     display_sentence(stimulus, screen, font)
-                    outlet.push_sample([f"{current_stimulus}"])
+                    outlet.push_sample([f"{current_stimulus}e"])
                     begin_trial = True
                     current_stimulus += 1
                     if current_stimulus >= 4:
@@ -74,7 +74,6 @@ def main():
                     break
             if event.type == pygame.QUIT:
                 break
-
 
 if __name__ == "__main__":
     main()
