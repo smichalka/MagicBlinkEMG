@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import mne
 
-streams, header = pyxdf.load_xdf("dataFiles/test1.xdf")
+streams, header = pyxdf.load_xdf("dataFiles/test2.xdf")
 print(streams)
 for stream in streams:
     y = stream['time_series']
